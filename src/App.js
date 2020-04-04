@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
+import Child from './component/Child'
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [
-        { id: "1", text: "todo1" },
-        { id: "2", text: "todo2" },
-        { id: "3", text: "todo3" }
-      ]
+      parentValue: 100
     };
+  }
+
+  addValueParent(value) {
+    const newValue = this.state.parentValue + value;
+    this.setState({ parentValue: newValue });
   }
 
   deleteTodo(id) {
@@ -20,18 +22,8 @@ class App extends Component {
 
   render() {
     return (
-      <ul>
-        {
-          this.state.todos.map((todo) => {
-            return (
-              <il key={todo.id}>{todo.text}
-                <button onClick={this.deleteTodo.bind(this, todo.id)} x></button>
-
-              </il>
-            )
-          })
-        }
-      </ul>
+      <Child pval={this.state.parentValue}
+        add={this.addValueParent.bind(this)}></Child>
     );
   }
 }
