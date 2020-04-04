@@ -4,40 +4,34 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      changeResult: "change default value",
-      inputResult: "input default value",
-      keyUpResult: "keyup default value"
+      todos: [
+        { id: "1", text: "todo1" },
+        { id: "2", text: "todo2" },
+        { id: "3", text: "todo3" }
+      ]
     };
   }
-  onInput(e) {
-    this.setState({ inputResult: e.target.value });
-  }
 
-  onChange(e) {
-    this.setState({ changeResult: e.target.value });
+  deleteTodo(id) {
+    let todos = this.state.todos;
+    todos = todos.filter((todo) => todo.id !== id);
+    this.setState({ todos: todos });
   }
-
-  onKeyup(e) {
-    this.setState({ keyUpResult: e.target.value });
-  }
-
 
   render() {
     return (
-      <div>
-        <input defaultValue={this.state.inputResult} onInput={this.onInput.bind(this)} placeholder="input" />
-        {this.state.inputResult}
-        <br />
+      <ul>
+        {
+          this.state.todos.map((todo) => {
+            return (
+              <il key={todo.id}>{todo.text}
+                <button onClick={this.deleteTodo.bind(this, todo.id)} x></button>
 
-        <input value={this.state.changeResult} onChange={(e) => this.onChange(e)} placeholder="change" />
-        {this.state.changeResult}
-        <br />
-
-        <input defaultValue={this.state.keyUpResult} onKeyUp={this.onKeyup.bind(this)} placeholder="keyup　　　　　　　　　" />
-        {this.state.keyUpResult}
-        <br />
-
-      </div>
+              </il>
+            )
+          })
+        }
+      </ul>
     );
   }
 }
