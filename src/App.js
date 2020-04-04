@@ -4,17 +4,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      clickResult: "",
-      changeResult: "",
-      inputResult: "",
-      keyUpResult: ""
+      changeResult: "change default value",
+      inputResult: "input default value",
+      keyUpResult: "keyup default value"
     };
   }
-
-  onClick(e) {
-    this.setState({ clickResult: "clicked" });
-  }
-
   onInput(e) {
     this.setState({ inputResult: e.target.value });
   }
@@ -31,19 +25,15 @@ class App extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.onClick.bind(this)}>click</button>
-        {this.state.clickResult}
-        <br />
-
-        <input onInput={this.onInput.bind(this)} placeholder="input" />
+        <input defaultValue={this.state.inputResult} onInput={this.onInput.bind(this)} placeholder="input" />
         {this.state.inputResult}
         <br />
 
-        <input onChange={this.onChange.bind(this)} placeholder="change" />
+        <input value={this.state.changeResult} onChange={(e) => this.onChange(e)} placeholder="change" />
         {this.state.changeResult}
         <br />
 
-        <input onKeyUp={this.onKeyup.bind(this)} placeholder="keyup" />
+        <input defaultValue={this.state.keyUpResult} onKeyUp={this.onKeyup.bind(this)} placeholder="keyup　　　　　　　　　" />
         {this.state.keyUpResult}
         <br />
 
