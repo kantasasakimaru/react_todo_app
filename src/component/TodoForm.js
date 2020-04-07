@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class TodoForm extends Component {
 
@@ -21,12 +22,13 @@ class TodoForm extends Component {
         todos.push(this.state.newTodo);
         localStorage.setItem('todos', JSON.stringify(todos));
         this.setState({ newTodo: "" });
+        this.props.push('/');
     }
 
     render() {
         return (
             <div>
-                <h3>My Todo</h3>
+                <Link to="/">Back</Link>
                 <input value={this.state.newTodo}
                     onChange={this.handleChange.bind(this)}
                     placeholder="Input here..."

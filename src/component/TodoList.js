@@ -13,6 +13,11 @@ class TodoList extends Component {
         const todos = JSON.parse(localStorage.getItem('todos')) || [];
         this.setState({ todos: todos });
     }
+
+    addTodo() {
+        this.props.history.push('/todos/add')
+    }
+
     // 削除するリスト番号をpropsに送っている？
     deleteTodo(i) {
         const todos = this.state.todos;
@@ -24,6 +29,7 @@ class TodoList extends Component {
     render() {
         return (
             <div>
+                <button onClick={this.addTodo.bind(this)}>ADD</button>
                 <h5>Todo List</h5>
                 <ul>
                     {
