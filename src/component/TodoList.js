@@ -2,9 +2,23 @@ import React, { Component } from 'react';
 
 class TodoList extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            todos: []
+        };
+    }
+
+    componentDidMount() {
+        const todos = JSON.parse(localStorage.getItem('todos')) || [];
+        this.setState({ todos: todos });
+    }
     // 削除するリスト番号をpropsに送っている？
     deleteTodo(i) {
-        this.props.del(i);
+        const todos = this.state.todos;
+        todos.splice(i, 1)
+        this.setState({ todos: todos });
+        localStorage.setItem('todos', JSON.stringify(this.state.todos));
     }
 
     render() {
@@ -13,10 +27,9 @@ class TodoList extends Component {
                 <h5>Todo List</h5>
                 <ul>
                     {
-                        this.props.todos.map((todo, i) => {
+                        this.state.todos.map((todo, i) => {
                             return (
-                                <li key={i}>
-                                    {todo}
+                                <li key={i}>{todo}
                                     <button onClick={this.deleteTodo.bind(this, i)}>DEL</button>
                                 </li>
                             )
