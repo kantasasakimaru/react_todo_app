@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class TodoList extends Component {
 
+    // 削除するリスト番号をpropsに送っている？
     deleteTodo(i) {
         this.props.del(i);
     }

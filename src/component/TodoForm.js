@@ -13,6 +13,8 @@ class TodoForm extends Component {
         this.setState({ newTodo: e.target.value });
     }
 
+    // proprsに新しい予定を渡している.
+    // 一方でStateに新しい予定の追加は行なっていない.
     addTodo() {
         if (this.state.newTodo === "") return;
         this.props.add(this.state.newTodo);
