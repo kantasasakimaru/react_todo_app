@@ -22,13 +22,14 @@ class TodoForm extends Component {
         todos.push(this.state.newTodo);
         localStorage.setItem('todos', JSON.stringify(todos));
         this.setState({ newTodo: "" });
-        this.props.push('/');
+        this.props.history.push('/');
     }
 
     render() {
         return (
             <div>
                 <Link to="/">Back</Link>
+                <br />
                 <input value={this.state.newTodo}
                     onChange={this.handleChange.bind(this)}
                     placeholder="Input here..."
