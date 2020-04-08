@@ -1,4 +1,17 @@
 import React, { Component } from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Divider from '@material-ui/core/Divider';
+import './TodoList.css'
+import { Link } from '@material-ui/core';
 
 class TodoList extends Component {
 
@@ -29,21 +42,40 @@ class TodoList extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.addTodo.bind(this)}>ADD</button>
-                <h5>Todo List</h5>
-                <ul>
-                    {
-                        this.state.todos.map((todo, i) => {
-                            return (
-                                <li key={i}>{todo}
-                                    <button onClick={this.deleteTodo.bind(this, i)}>DEL</button>
-                                </li>
-                            )
-                        })
+                <AppBar position="static">
+                    <Toolbar>
+                        <div className="toolbar-left"></div>
+                        <Typography variant="title" color="inherit" className="toolbar-center">
+                            My Todo
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <List>
+                    {this.state.todos.map((todo, i) => {
+                        return (
+                            <div>
+                                <ListItem key={i}>
+                                    <ListItemText>{todo}</ListItemText>
+                                    <IconButton aria-label="Delete"
+                                        onClick={this.deleteTodo.bind(this, i)}>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </ListItem>
+                                <Divider />
+                            </div>
+                        )
+                    })
                     }
-                </ul>
+                </List>
+
+                <div className="bottom-right">
+                    <Button variant="fab" color="primary" aria-label="Add"
+                        onClick={this.addTodo.bind(this)}>
+                        <AddIcon />
+                    </Button>
+                </div>
             </div>
-        )
+        );
     }
 }
 
