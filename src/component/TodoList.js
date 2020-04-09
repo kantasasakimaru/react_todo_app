@@ -11,7 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Divider from '@material-ui/core/Divider';
 import './TodoList.css'
-import { Link } from '@material-ui/core';
+import TodoDetail from './TodoDetail'
 
 class TodoList extends Component {
 
@@ -56,6 +56,7 @@ class TodoList extends Component {
                             <div>
                                 <ListItem key={i}>
                                     <ListItemText>{todo}</ListItemText>
+                                    <TodoDetail />
                                     <IconButton aria-label="Delete"
                                         onClick={this.deleteTodo.bind(this, i)}>
                                         <DeleteIcon />
