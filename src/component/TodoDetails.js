@@ -15,6 +15,7 @@ class TodoDetails extends Component {
         this.state = {
             open: false,
             detailContent: "",
+            newContent: "",
         };
     }
 
@@ -28,9 +29,16 @@ class TodoDetails extends Component {
 
     handleClickClose() {
         this.setState({ open: false });
-
     }
 
+    handleSave(e) {
+        if (this.state.newTodo === "") return;
+        const todos = JSON.parse(localStorage.getItem('todos')) || [];
+        todos.push(this.state.newTodo);
+        localStorage.setItem('todos', JSON.stringify(todos));
+        this.setState({ newTodo: "" });
+        this.props.history.push('/');
+    }
 
     render() {
         return (
@@ -39,8 +47,8 @@ class TodoDetails extends Component {
                     Todo 詳細
                 </Button>
                 <Dialog
-                    open={true}
-                    onClose={false}
+                    open={this.state.open}
+                    onClose={this.state.open}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
