@@ -19,8 +19,14 @@ class TodoDetails extends Component {
         };
     }
 
+    componentDidMount() {
+        const content = JSON.parse(localStorage.getItem('detailContents')) || [];
+        this.setState({ detailContent: content });
+    }
+
     handleChange(e) {
-        this.setState({ detailContent: e.target.value });
+        this.setState({ newContent: e.target.value });
+        console.warn(e.target.value);
     }
 
     handleClickOpen() {
@@ -32,12 +38,10 @@ class TodoDetails extends Component {
     }
 
     handleSave(e) {
-        if (this.state.newTodo === "") return;
-        const todos = JSON.parse(localStorage.getItem('todos')) || [];
-        todos.push(this.state.newTodo);
-        localStorage.setItem('todos', JSON.stringify(todos));
+        if (this.state.newContent === "") return;
+        console.warn(this.state.newContent);
+        localStorage.setItem('detailContents', this.state.newContent);
         this.setState({ newTodo: "" });
-        this.props.history.push('/');
     }
 
     render() {
@@ -58,15 +62,21 @@ class TodoDetails extends Component {
                             <form noValidate autoComplete="off">
                                 <TextField
                                     onChange={this.handleClickOpen.bind(this)}
+                                    defaultValue={this.state.detailContent}
                                     id="outlined-basic" label="詳細内容" variant="outlined" />
                             </form>
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button color="primary"
-                            onClick={this.handleClickClose.bind(this)}
+                            onClick={this.handleSave.bind(this)}
                         >
                             保存
+                    </Button>
+                        <Button color="primary"
+                            onClick={this.handleClickClose.bind(this)}
+                        >
+                            閉じる
                     </Button>
                     </DialogActions>
                 </Dialog>
