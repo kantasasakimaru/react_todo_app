@@ -50,24 +50,26 @@ class TodoList extends Component {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <List>
-                    {this.state.todos.map((todo, i) => {
-                        return (
-                            <div>
-                                <ListItem key={i}>
-                                    <ListItemText>{todo}</ListItemText>
-                                    <TodoDetails />
-                                    <IconButton aria-label="Delete"
-                                        onClick={this.deleteTodo.bind(this, i)}>
-                                        <DeleteIcon />
-                                    </IconButton>
-                                </ListItem>
-                                <Divider />
-                            </div>
-                        )
-                    })
-                    }
-                </List>
+                {this.state.todos !== null &&
+                    <List>
+                        {this.state.todos.map((todo, i) => {
+                            return (
+                                <div>
+                                    <ListItem key={i}>
+                                        <ListItemText>{todo}</ListItemText>
+                                        <TodoDetails />
+                                        <IconButton aria-label="Delete"
+                                            onClick={this.deleteTodo.bind(this, i)}>
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </ListItem>
+                                    <Divider />
+                                </div>
+                            )
+                        })
+                        }
+                    </List>
+                }
 
                 <div className="bottom-right">
                     <Button variant="fab" color="primary" aria-label="Add"
